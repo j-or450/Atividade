@@ -16,10 +16,5 @@ public class ClasseMain {
         carro2.setArDoCarro("Não");
         carro2.setDirecaoHidraulica("Sim");
         carro2.imprimeValores();
-
-
-
-
-
     }
 }

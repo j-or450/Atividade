@@ -3,7 +3,7 @@ package um;
 public class Variavel {
     private Character tipoCharacter = 'M';
     private Double tipoDoble = 6.5;
-    private Integer tipoInteger = 657894012;
+    private Integer tipoInteger = 657890123;
 
 
     public Character getTipoCharacter() {

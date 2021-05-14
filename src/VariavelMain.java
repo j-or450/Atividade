@@ -1,4 +1,4 @@
-package um;
+import um.Variavel;
 
 public class VariavelMain {
     public static void main(String[] args) {
