@@ -1,10 +1,11 @@
 package modulo_7;
 
 public abstract class Conta {
-    private int numero;
-    private int agencia;
-    private String banco;
+     private int numero;
+     private int agencia;
     protected double saldo;
+    protected double sacar;
+    protected double depositar;
 
     public int getNumero() {
         return numero;
@@ -22,13 +23,6 @@ public abstract class Conta {
         this.agencia = agencia;
     }
 
-    public String getBanco() {
-        return banco;
-    }
-
-    public void setBanco(String banco) {
-        this.banco = banco;
-    }
 
     public abstract double getSaldo();
 
@@ -38,20 +32,24 @@ public abstract class Conta {
         this.saldo = saldo;
     }
 
-    public Conta(int numero, int agencia, String banco, double saldo) {
-        this.numero = numero;
-        this.agencia = agencia;
-        this.banco = banco;
-        this.saldo = saldo;
+    public abstract double getSacar();
+
+
+    public void setSacar(double sacar) {
+        this.sacar = sacar;
     }
 
-    @Override
-    public String toString() {
-        return "Conta{" +
-                "numero=" + numero +
-                ", agencia=" + agencia +
-                ", banco='" + banco + '\'' +
-                ", saldo=" + saldo +
-                '}';
+    public abstract double getDepositar();
+
+    public abstract  void setDepositar(double depositar);
+
+
+    public Conta(int numero, int agencia, double saldo, double sacar) {
+        this.numero = numero;
+        this.agencia = agencia;
+        this.saldo = saldo;
+        this.sacar = sacar;
     }
+
+
 }

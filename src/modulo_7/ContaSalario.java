@@ -1,11 +1,11 @@
 package modulo_7;
 
-public class ContaCorrente extends Conta{
-    private double chequeEspecial;
+public class ContaSalario extends Conta {
+    private int limiteDeSaque;
 
-    public ContaCorrente(int numero, int agencia, double saldo, double sacar, double chequeEspecial) {
+    public ContaSalario(int numero, int agencia, double saldo, double sacar, int limiteDeSaque) {
         super(numero, agencia, saldo, sacar);
-        this.chequeEspecial = chequeEspecial;
+        this.limiteDeSaque = limiteDeSaque;
     }
 
     @Override
@@ -13,8 +13,9 @@ public class ContaCorrente extends Conta{
         return "Numero: " + getNumero() +
                 "     Agencia: " + getAgencia();
     }
+
     public double getSaldo(){
-        return this.chequeEspecial + this.saldo;
+        return this.saldo;
     }
 
     public double getSacar() {
