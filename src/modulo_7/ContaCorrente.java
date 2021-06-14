@@ -1,10 +1,10 @@
 package modulo_7;
 
-public class ContaCorrente extends Conta{
+public class ContaCorrente extends Conta {
     private double chequeEspecial;
 
-    public ContaCorrente(int numero, int agencia, double saldo, double sacar, double chequeEspecial) {
-        super(numero, agencia, saldo, sacar);
+    public ContaCorrente(int numero, int agencia, double saldo, double chequeEspecial) {
+        super(numero, agencia, saldo);
         this.chequeEspecial = chequeEspecial;
     }
 
@@ -13,18 +13,24 @@ public class ContaCorrente extends Conta{
         return "Numero: " + getNumero() +
                 "     Agencia: " + getAgencia();
     }
-    public double getSaldo(){
+
+    public double getSaldo() {
         return this.chequeEspecial + this.saldo;
     }
 
-    public double getSacar() {
-        return this.saldo-this.sacar;
+    public void depositar(double valor) {
+        this.saldo += valor;
+        System.out.println("Deposito: " + valor + " reais\nrealizado com sucesso.");
     }
 
-    public double getDepositar() {
-        return depositar;
-    }
-    public void setDepositar(double depositar){
-        this.depositar += depositar;
+    public boolean sacar(double valor) {
+        if(valor > this.getSaldo()) {
+            System.out.println("Saldo insuficiente para saque.\nConfira seu saldo.");
+            return false;
+        } else {
+            this.saldo -= valor;
+            System.out.println("Saque de: " +valor+ " reais\nrealizado com sucesso.");
+            return true;
+        }
     }
 }

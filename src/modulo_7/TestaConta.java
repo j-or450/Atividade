@@ -1,16 +1,29 @@
-package modulo_7;
 
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
+//Toda vez que escolher a opção saque em qualquer uma das contas sera debidato um valor de 350.00 da contanta mas respeitando as regras de negocio da conta e o saldo.
+
+//Se escolher a opção deposito na conta corrente e na conta poupança sera depositado um valor 250.00 reias, não tem limete para quantidade de deposito.
+
+//Conta salario o limite e de 2 saque e nao pode fazer deposito.
+
+package modulo_7;
 
 import java.util.Scanner;
 
 public class TestaConta {
     public static void main(String[] args) {
-        int retornaMenuAnterior;
 
         Scanner input = new Scanner(System.in);
 
         MetudosConta menu = new MetudosConta();
+
+        //Construtor da conta corrente.
+        ContaCorrente contCorrente = new ContaCorrente(11111, 41, 100, 500);
+
+        //Construtor da conta poupaça.
+        ContaPoupanca contPoupanca = new ContaPoupanca(33333, 41, 500, 10,  0.05);
+
+        //Construtor da conta salario.
+        ContaSalario contSalario = new ContaSalario(55555, 41, 1500, 2);
 
         //Mostra o primeiro menu.
         menu.primeiroMenu();
@@ -21,46 +34,57 @@ public class TestaConta {
 
             //Inico do switch 1.
             switch (menu.opcao) {
-                case 1: //Entra na conta corrente.
+                //Esse case entra na conta corrente.
+                case 1:
                     System.out.println("=============================");
                     System.out.println("       CONTA CORRENTE");
-                    System.out.println(menu.contCorrente);
+                    System.out.println(contCorrente);
                     System.out.println("-----------------------------");
 
                     menu.segundoMenu(); //Mostra o menu sado, sacar e etc.
 
-                    //Captura a opção escolhida.
-                    menu.sairDoAplicativo();
+                    menu.sairDoAplicativo();//Captura a opção escolhida.
 
-                    //Inicio do switch 2.
+                    //Esse switch entra nas funcões conta corrente
                     switch (menu.varOpcoes) {
-                        case 1: //Entra na fução saldo da conta corrente
-                            menu.metudoSaldoCorrente(); //Mostra o saldo da conta corrente.
-                            menu.chamaMenuPricipal();
-                            if(menu.voltaMenuAnterior == 1) {
-                                menu.opcao = 1;
-                            }
-                            break;
-
-                        case 2: //Entre na fução saque da conta corrente
-                            menu.metudoSaqueCorrente();
+                        //Entra na fução saldo da conta corrente
+                        case 1:
+                            System.out.println("======================");
+                            System.out.println("SALDO CONTA CORRENTE");
+                            System.out.println("Saldo: " + contCorrente.getSaldo());
+                            System.out.println("----------------------");
                             menu.chamaMenuPricipal();
                             break;
 
-                        case 3: //Entra na funcao de deposito da conta corrente.
-                            menu.metudoDepositarCorrente(); //Capitura o valor depositado na conta conta corrente.
+                        //Entre na fução saque da conta corrente
+                        case 2:
+                            System.out.println("======================");
+                            System.out.println("SAQUE CONTA CORRENTE");
+                            System.out.println("----------------------");
+                            contCorrente.sacar(350);//Valor que sera sacado
+                            System.out.println("----------------------");
                             menu.chamaMenuPricipal();
                             break;
-                    }
-                    // Fim do switch 2.
 
+                        //Entra na funcao de deposito da conta corrente.
+                        case 3:
+                            System.out.println("=======================");
+                            System.out.println("DEPOSITO CONTA CORRENTE");
+                            System.out.println("-----------------------");
+                            contCorrente.depositar(250);//Valor que sera depositado
+                            System.out.println("-----------------------");
+                            menu.chamaMenuPricipal();
+                            break;
+                    }//Fim do switch da conta corrente
                     break; //Do switch 1.
 
+
                 //Case do switch 1.
-                case 2://Entra na conta poupaça.
+                //Esse case entra na conta poupaça.
+                case 2:
                     System.out.println("=============================");
-                    System.out.println("         CONTA POUPAÇA");
-                    System.out.println(menu.contPoupanca);
+                    System.out.println("        CONTA POUPAÇA");
+                    System.out.println(contPoupanca);
                     System.out.println("-----------------------------");
 
                     menu.segundoMenu(); //Mostra o menu sado, sacar e etc.
@@ -68,35 +92,48 @@ public class TestaConta {
                     //Captura a opção escolhida.
                     menu.sairDoAplicativo();
 
-                    //Inicio do switch 3.
+                    //Esse switch entra nas fuções da conta poupaça
                     switch (menu.varOpcoes) {
-                        case 1: //Entra na fução saldo da conta poupaça
-                            menu.metudoSaldoPoupanca(); //Mostra o saldo da conta poupaça.
-                            menu.chamaMenuPricipal();
-                            if(menu.voltaMenuAnterior == 1) {
-                                menu.opcao = 2;
-                            }
-                            break;
-
-                        case 2: //Entre na fução saque da conta poupaça
-                            menu.metudoSaquePoupanca();
+                        //Entra na fução saldo da conta poupaça
+                        case 1:
+                            System.out.println("==============================");
+                            System.out.println("SALDO CONTA POUPANÇA");
+                            System.out.println("------------------------------");
+                            System.out.println("Dia do aniversario da conta: "+contPoupanca.getDiaAniversario());
+                            System.out.printf("Saldo: %.2f\n", contPoupanca.getSaldo());
+                            System.out.println("------------------------------");
                             menu.chamaMenuPricipal();
                             break;
 
-                        case 3: //Entra na funcao de deposito da conta poupaça.
-                            menu.metudoDepositarPoupanca(); //Capitura o valor depositado na conta poupaça.
+                        //Entre na fução saque da conta poupaça
+                        case 2:
+                            System.out.println("==============================");
+                            System.out.println("SAQUE CONTA POUPANÇA");
+                            System.out.println("------------------------------");
+                            contPoupanca.sacar(350);//Valor que sera sacado
+                            System.out.println("------------------------------");
                             menu.chamaMenuPricipal();
                             break;
-                    }
-                    //Fim do switch 3.
 
+                        //Entra na funcao de deposito da conta poupaça.
+                        case 3:
+                            System.out.println("=======================");
+                            System.out.println("DEPOSITO CONTA POUPANÇA");
+                            System.out.println("-----------------------");
+                            contPoupanca.depositar(250);//Valor que sera depositado
+                            System.out.println("-----------------------");
+                            menu.chamaMenuPricipal();
+                            break;
+                    }//Fim do switch da conta poupaça
                     break; //Do switch 1
 
+
                 //Case do switch 1.
-                case 3: //Entra na conta salario
+                //Entra na conta salario
+                case 3:
                     System.out.println("=============================");
                     System.out.println("         CONTA SALARIO");
-                    System.out.println(menu.contSalario);
+                    System.out.println(contSalario);
                     System.out.println("-----------------------------");
 
                     menu.segundoMenu(); //Mostra o menu sado, sacar e etc.
@@ -104,25 +141,37 @@ public class TestaConta {
                     //Captura a opção escolhida.
                     menu.sairDoAplicativo();
 
-                    //Inico do switch 4.
+                    //Esse switch entra nas funcões conta salario
                     switch (menu.varOpcoes) {
-                        case 1: //Entra na fução saldo da conta salario
-
-                            menu.metudoSaldoSalario(); //Mostra o saldo da conta salario.
-                            menu.chamaMenuPricipal();
-                            if(menu.voltaMenuAnterior == 1) {
-                                menu.opcao = 3;
-                            }
-                            break;
-
-                        case 2: //Entre na fução saque da conta salario
-                            menu.metudoSaqueSalario();
+                        //Entra na fução saldo da conta salario
+                        case 1:
+                            System.out.println("======================");
+                            System.out.println("SALDO DA CONTA SALARIO");
+                            System.out.println("Saldo: " + contSalario.getSaldo());
+                            System.out.println("----------------------");
                             menu.chamaMenuPricipal();
                             break;
 
-                        case 3: //Entra na funcao de deposito da conta salario.
-                            menu.metudoDepositarSalario(); //Capitura o valor depositado na conta poupaça.
+                        //Entre na fução saque da conta salario
+                        case 2:
+                            System.out.println("======================");
+                            System.out.println("SAQUE CONTA SALARIO");
+                            System.out.println("----------------------");
+                            //System.out.println("Valor do saque:");
+                            contSalario.sacar(350);//Valor que sera sacado
+                            System.out.println("----------------------");
                             menu.chamaMenuPricipal();
+                            break;
+
+                        //Entra na funcao de deposito da conta salario.
+                        case 3:
+                            System.out.println("======================");
+                            System.out.println("DEPOSITO CONTA SALARIO");
+                            System.out.println("----------------------");
+                            contSalario.depositar();
+                            System.out.println("----------------------");
+                            menu.chamaMenuPricipal();
+
                             break;
                     }
                     //Fim do switch 4.
@@ -139,6 +188,9 @@ public class TestaConta {
 
             if(menu.opcao == 9)break; //Finaliza o loop do for.
         }
-        menu.msgNoFimPrograma(); //Mensagen para o encerramento do programa.
+        System.out.println("------------------------------");
+        System.out.println("==============================");
+        System.out.println("Obrigado por usar nosso banco!");
+        System.out.println("==============================");
     }
 }
